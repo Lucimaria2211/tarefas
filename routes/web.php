@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TarefasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[TarefasController::class, 'index'])->name('tarefas-index');
+Route::get('/create',[TarefasController::class, 'create'])->name('tarefas-create');
+Route::post('/',[TarefasController::class, 'store'])->name('tarefas-store');
+Route::get('{id}/edit',[TarefasController::class, 'edit'])->where('id','[0-9]+')->name('tarefas-edit');
+Route::put('{id}',[TarefasController::class, 'update'])->where('id','[0-9]+')->name('tarefas-update');
+Route::delete('{id}',[TarefasController::class, 'destroy'])->where('id','[0-9]+')->name('tarefas-destroy');
