@@ -1,13 +1,20 @@
-id: 54778
-name: tarefas
+
+id: 111
+name: poursio
 environments:
     production:
-        memory: 1024
-        cli-memory: 512
-        runtime: 'php-8.2:al2'
+        database: lista
         build:
-            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
+            - 'composer install --no-dev --classmap-authoritative'
             - 'php artisan event:cache'
-          # - 'npm ci && npm run build && rm -rf node_modules'
+            - 'npm install && npm run prod && rm -rf node_modules'
         deploy:
-          - 'php artisan migrate --force'
+            - 'php artisan migrate --force'
+    staging:
+        database: poursio
+        build:
+            - 'composer install --classmap-authoritative'
+            - 'php artisan event:cache'
+            - 'npm install && npm run dev && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
