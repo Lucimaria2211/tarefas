@@ -1,6 +1,6 @@
 
 id: 111
-name: poursio
+name: tarefas
 environments:
     production:
         database: lista
@@ -11,7 +11,7 @@ environments:
         deploy:
             - 'php artisan migrate --force'
     staging:
-        database: poursio
+        database: lista
         build:
             - 'composer install --classmap-authoritative'
             - 'php artisan event:cache'
